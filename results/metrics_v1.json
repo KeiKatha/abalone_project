@@ -1,0 +1,13 @@
+{
+    "hyperparameters": {
+        "n_estimators": 100,
+        "random_state": 42,
+        "model": "RandomForest"
+    },
+    "metrics": {
+        "MAE": 1.566011976047904,
+        "RMSE": 2.253325154410035,
+        "R2": 0.5762721457747289
+    },
+    "seed": 42
+}
