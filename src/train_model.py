@@ -14,8 +14,8 @@ def main():
     # Configuración de rutas y semilla
     SEED = 42
     DATA_PATH = "data/processed/abalone_clean.csv"
-    MODEL_PATH = "models/model_v1.pkl"
-    METRICS_PATH = "results/metrics_v1.json"
+    MODEL_PATH = "models/model_v3.pkl"
+    METRICS_PATH = "results/metrics_v3.json"
     LOG_PATH = "results/experiments_log.csv"
 
     # 1. Cargar datos limpios
@@ -32,7 +32,7 @@ def main():
     # 4. Pipeline: Escalado + Modelo (ajusta el scaler SOLO con X_train)
     pipeline = Pipeline([
         ('scaler', StandardScaler()),
-        ('rf', RandomForestRegressor(n_estimators=100, random_state=SEED))
+        ('rf', RandomForestRegressor(n_estimators=200, max_depth=10, random_state=SEED))
     ])
     pipeline.fit(X_train, y_train)
 
@@ -47,7 +47,7 @@ def main():
     joblib.dump(pipeline, MODEL_PATH, compress=3)
 
     # 7. Guardar métricas en JSON
-    hiperparametros = {"n_estimators": 100, "random_state": SEED, "model": "RandomForest"}
+    hiperparametros = {"n_estimators": 200, "max_depth": 10, "random_state": SEED, "model": "RandomForest"}
     
     with open(METRICS_PATH, 'w') as f:
         json.dump({
@@ -65,7 +65,7 @@ def main():
         
         exp_id = f"exp_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        writer.writerow([exp_id, fecha_hora, "v1", json.dumps(hiperparametros), round(mae, 4), round(rmse, 4), round(r2, 4)])
+        writer.writerow([exp_id, fecha_hora, "v3", json.dumps(hiperparametros), round(mae, 4), round(rmse, 4), round(r2, 4)])
 
     print(f"Modelo entrenado y guardado. R2: {r2:.4f}, RMSE: {rmse:.4f}")
 

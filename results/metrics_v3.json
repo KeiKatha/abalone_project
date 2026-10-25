@@ -1,0 +1,14 @@
+{
+    "hyperparameters": {
+        "n_estimators": 200,
+        "max_depth": 10,
+        "random_state": 42,
+        "model": "RandomForest"
+    },
+    "metrics": {
+        "MAE": 1.535735889919105,
+        "RMSE": 2.226882635900976,
+        "R2": 0.5861585931263169
+    },
+    "seed": 42
+}
